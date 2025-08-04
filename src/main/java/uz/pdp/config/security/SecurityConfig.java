@@ -3,6 +3,7 @@ package uz.pdp.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +18,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(
+        prePostEnabled = false,
+        securedEnabled = true,
+        jsr250Enabled = true
+)
 public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
@@ -41,7 +47,8 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests()
                 .requestMatchers(WHITE_URL).permitAll()
-                .requestMatchers("/admin").hasRole("ADMIN")
+//                .requestMatchers("/admin").hasRole("ADMIN")
+//                .requestMatchers("/user").hasAnyRole("USER","ADMIN")
                 .anyRequest()
                 .authenticated(); //.fullyAuthenticated();
 
@@ -97,3 +104,16 @@ public class SecurityConfig {
 
 
 }
+/*
+CREATE_USER
+FIND_ALL_USER
+FIND_BY_ID_USER
+UPDATE_USER
+
+BLOCK_USER
+CREATE_ADMIN
+DELETE_ADMIN
+
+SHOW_ALL_STAFF
+CREATE_NEW_STAFF
+* */
