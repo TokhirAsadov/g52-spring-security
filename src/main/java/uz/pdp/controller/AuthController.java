@@ -45,7 +45,6 @@ public class AuthController {
         AuthUser authUser = AuthUser.builder()
                 .username(dto.username())
                 .password(encoder.encode(dto.password()))
-                .role("USER")
                 .build();
         Integer userId = authUserDao.save(authUser);
         System.out.println("userId: "+userId);
