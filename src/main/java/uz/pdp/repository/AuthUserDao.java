@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import uz.pdp.entity.AuthUser;
 
@@ -27,7 +26,6 @@ public class AuthUserDao {
             var preparedStatement = con.prepareStatement(sql, new String[]{"id"});
             preparedStatement.setString(1, authUser.getUsername());
             preparedStatement.setString(2, authUser.getPassword());
-            preparedStatement.setString(3, authUser.getRole());
             return preparedStatement;
         }, keyHolder);
         Number key = keyHolder.getKey();
